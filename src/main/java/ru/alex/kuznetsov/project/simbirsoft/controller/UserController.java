@@ -36,7 +36,7 @@ public class UserController {
 
     @ExceptionHandler(IOException.class)
     public ResponseEntity handleIOException(IOException e) {
-        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        return ResponseEntity.badRequest().build();
     }
 }
 
