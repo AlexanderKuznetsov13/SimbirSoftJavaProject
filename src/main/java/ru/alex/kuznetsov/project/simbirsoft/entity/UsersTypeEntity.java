@@ -1,12 +1,11 @@
 package ru.alex.kuznetsov.project.simbirsoft.entity;
 
-
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "project")
-public class Project {
+@Table(name = "userstype")
+public class UsersTypeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,20 +17,20 @@ public class Project {
     @Column(name = "description")
     private String description;
 
-    @OneToMany(mappedBy = "projectRelease")
-    private List<Release> releases;
+    @OneToMany(mappedBy = "usersTypeUsers")
+    private List<UsersEntity> users;
 
-    @OneToMany(mappedBy = "projectUsersByProject")
-    private List<UsersByProject> usersByProjects;
+    @OneToMany(mappedBy = "usersTypeUsersByProject")
+    private List<UsersByProjectEntity> usersByProjects;
 
-    public Project() {
+    public UsersTypeEntity(){
     }
 
-    public Project(Integer id, String name, String description, List<Release> releases, List<UsersByProject> usersByProjects) {
+    public UsersTypeEntity(Integer id, String name, String description, List<UsersEntity> users, List<UsersByProjectEntity> usersByProjects) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.releases = releases;
+        this.users = users;
         this.usersByProjects = usersByProjects;
     }
 
@@ -59,19 +58,19 @@ public class Project {
         this.description = description;
     }
 
-    public List<Release> getReleases() {
-        return releases;
+    public List<UsersEntity> getUsers() {
+        return users;
     }
 
-    public void setReleases(List<Release> releases) {
-        this.releases = releases;
+    public void setUsers(List<UsersEntity> users) {
+        this.users = users;
     }
 
-    public List<UsersByProject> getUsersByProjects() {
+    public List<UsersByProjectEntity> getUsersByProjects() {
         return usersByProjects;
     }
 
-    public void setUsersByProjects(List<UsersByProject> usersByProjects) {
+    public void setUsersByProjects(List<UsersByProjectEntity> usersByProjects) {
         this.usersByProjects = usersByProjects;
     }
 }
