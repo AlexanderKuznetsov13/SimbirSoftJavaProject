@@ -4,6 +4,7 @@ import ru.alex.kuznetsov.project.simbirsoft.dto.*;
 import ru.alex.kuznetsov.project.simbirsoft.entity.ProjectEntity;
 import ru.alex.kuznetsov.project.simbirsoft.entity.ReleaseEntity;
 import ru.alex.kuznetsov.project.simbirsoft.entity.TaskStatusEntity;
+import ru.alex.kuznetsov.project.simbirsoft.entity.UsersTypeEntity;
 
 public class CommonMapper {
 
@@ -54,7 +55,21 @@ public class CommonMapper {
         return responseDto;
     }
 
+    public static UsersTypeEntity fromUserTypeRequestDtoToUsersTypeEntity(UserTypeRequestDto requestDto) {
+        UsersTypeEntity usersType = new UsersTypeEntity();
+        usersType.setId(requestDto.getId());
+        usersType.setName(requestDto.getName());
+        usersType.setDescription(requestDto.getDescription());
+        return usersType;
+    }
 
+    public UserTypeResponseDto fromUsersTypeEntityToUserTypeResponseDto(UsersTypeEntity usersType) {
+        UserTypeResponseDto responseDto = new UserTypeResponseDto();
+        responseDto.setId(usersType.getId());
+        responseDto.setName(usersType.getName());
+        responseDto.setDescription(usersType.getDescription());
+        return responseDto;
+    }
 //    public static ProjectEntity fromProjectRequestDtoToProjectEntity(ProjectRequestDto requestDto) {
 //        ProjectEntity project = new ProjectEntity();
 //        return project;
