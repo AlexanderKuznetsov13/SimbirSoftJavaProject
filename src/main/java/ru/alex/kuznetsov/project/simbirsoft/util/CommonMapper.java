@@ -13,7 +13,7 @@ public class CommonMapper {
         return release;
     }
 
-    public ReleaseResponseDto fromReleaseEntityToReleaseResponseDto(ReleaseEntity release) {
+    public static ReleaseResponseDto fromReleaseEntityToReleaseResponseDto(ReleaseEntity release) {
         ReleaseResponseDto responseDto = new ReleaseResponseDto();
         responseDto.setId(release.getId());
         responseDto.setStartWorkTime(release.getStartWorkTime());
@@ -30,7 +30,7 @@ public class CommonMapper {
         return project;
     }
 
-    public ProjectResponseDto fromProjectEntityToProjectResponseDto(ProjectEntity project) {
+    public static ProjectResponseDto fromProjectEntityToProjectResponseDto(ProjectEntity project) {
         ProjectResponseDto responseDto = new ProjectResponseDto();
         responseDto.setId(project.getId());
         responseDto.setName(project.getName());
@@ -45,7 +45,7 @@ public class CommonMapper {
         return taskStatus;
     }
 
-    public TaskStatusResponseDto fromTaskStatusEntityToTaskStatusResponseDto(TaskStatusEntity taskStatus) {
+    public static TaskStatusResponseDto fromTaskStatusEntityToTaskStatusResponseDto(TaskStatusEntity taskStatus) {
         TaskStatusResponseDto responseDto = new TaskStatusResponseDto();
         responseDto.setId(taskStatus.getId());
         responseDto.setName(taskStatus.getName());
@@ -60,7 +60,7 @@ public class CommonMapper {
         return usersType;
     }
 
-    public UserTypeResponseDto fromUsersTypeEntityToUserTypeResponseDto(UsersTypeEntity usersType) {
+    public static UserTypeResponseDto fromUsersTypeEntityToUserTypeResponseDto(UsersTypeEntity usersType) {
         UserTypeResponseDto responseDto = new UserTypeResponseDto();
         responseDto.setId(usersType.getId());
         responseDto.setName(usersType.getName());
@@ -69,27 +69,27 @@ public class CommonMapper {
         return responseDto;
     }
 
-        public static UsersEntity fromUsersRequestDtoToUsersEntity(UserRequestDto requestDto) {
-            UsersEntity user = new UsersEntity();
-            user.setId(requestDto.getId());
-            user.setName(requestDto.getName());
-            user.setSurname(requestDto.getSurname());
-            user.setMiddlename(requestDto.getMiddlename());
-            user.setLogin(requestDto.getNickname());
-            user.setPassword(requestDto.getPassword());
-            return user;
-        }
+    public static UsersEntity fromUsersRequestDtoToUsersEntity(UserRequestDto requestDto) {
+        UsersEntity user = new UsersEntity();
+        user.setId(requestDto.getId());
+        user.setName(requestDto.getName());
+        user.setSurname(requestDto.getSurname());
+        user.setMiddlename(requestDto.getMiddlename());
+        user.setLogin(requestDto.getNickname());
+        user.setPassword(requestDto.getPassword());
+        return user;
+    }
 
-        public UserResponseDto fromUserEntityToUserResponseDto(UsersEntity usersType) {
-            UserResponseDto responseDto = new UserResponseDto();
-            responseDto.setId(usersType.getId());
-            responseDto.setName(usersType.getName());
-            responseDto.setSurname(usersType.getSurname());
-            responseDto.setMiddlename(usersType.getMiddlename());
-            responseDto.setNickname(usersType.getLogin());
-            responseDto.setPassword(usersType.getPassword());
-            responseDto.setUserTypeId(usersType.getUsersTypeUsers().getId());
-            return responseDto;
+    public static UserResponseDto fromUserEntityToUserResponseDto(UsersEntity usersType) {
+        UserResponseDto responseDto = new UserResponseDto();
+        responseDto.setId(usersType.getId());
+        responseDto.setName(usersType.getName());
+        responseDto.setSurname(usersType.getSurname());
+        responseDto.setMiddlename(usersType.getMiddlename());
+        responseDto.setNickname(usersType.getLogin());
+        responseDto.setPassword(usersType.getPassword());
+        responseDto.setUserTypeId(usersType.getUsersTypeUsers().getId());
+        return responseDto;
 
     }
 
@@ -99,7 +99,7 @@ public class CommonMapper {
         return usersByProject;
     }
 
-    public UsersByProjectResponseDto fromUsersByProjectEntityToUserByProjectResponseDto(UsersByProjectEntity usersByProject) {
+    public static UsersByProjectResponseDto fromUsersByProjectEntityToUserByProjectResponseDto(UsersByProjectEntity usersByProject) {
         UsersByProjectResponseDto responseDto = new UsersByProjectResponseDto();
         responseDto.setId(usersByProject.getId());
         responseDto.setUserId(usersByProject.getUsersUsersByProject().getId());
@@ -118,7 +118,7 @@ public class CommonMapper {
         return task;
     }
 
-    public BoardTaskResponseDto fromTaskEntityToBoardTaskResponseDto(TaskEntity task) {
+    public static BoardTaskResponseDto fromTaskEntityToBoardTaskResponseDto(TaskEntity task) {
         BoardTaskResponseDto responseDto = new BoardTaskResponseDto();
         responseDto.setId(task.getId());
         responseDto.setAuthorId(task.getAuthorUsersByProjectTask().getId());
