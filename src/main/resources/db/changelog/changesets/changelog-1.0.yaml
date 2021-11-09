@@ -1,6 +1,72 @@
 databaseChangeLog:
 
   - changeSet:
+      id: createTable-users
+      author: Aleksander Kuznetsov
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column: {name: id, type: INT, autoIncrement: true, constraints: {nullable: false, primaryKey: true, primaryKeyName: user_id_pk} }
+              - column: {name: name, type: VARCHAR(100)}
+              - column: {name: surname, type: VARCHAR(100)}
+              - column: {name: middlename, type: VARCHAR(100)}
+              - column: {name: email, type: VARCHAR(100)}
+              - column: {name: login, type: VARCHAR(100)}
+              - column: {name: password, type: VARCHAR(100)}
+              - column: {name: usertype_id, type: INT, constraints: { nullable: false, foreignKeyName: users_usertype_fk, references: userstype(id)}}
+
+  - changeSet:
+      id: createTable-userstype
+      author: Aleksander Kuznetsov
+      changes:
+        - createTable:
+            tableName: userstype
+            columns:
+              - column: {name: id, type: INT, autoIncrement: true, constraints: {nullable: false, primaryKey: true, primaryKeyName: userstype_id_pk}}
+              - column: {name: name, type: VARCHAR(100)}
+              - column: {name: description, type: VARCHAR(100)}
+
+  - changeSet:
+      id: createTable-usersbyproject
+      author: Aleksander Kuznetsov
+      changes:
+        - createTable:
+            tableName: usersbyproject
+            columns:
+              - column: {name: id, type: INT, autoIncrement: true, constraints: {nullable: false, primaryKey: true, primaryKeyName: usersbyproject_id_pk}}
+              - column: {name: name, type: VARCHAR(100)}
+              - column: {name: project_id, type: INT, constraints: { nullable: false, foreignKeyName: userbyproject_project_fk, references: project(id)}}
+              - column: {name: user_id, type: INT, constraints: { nullable: false, foreignKeyName: userbyproject_user_fk, references: user(id)}}
+              - column: {name: usertype_id, type: INT, constraints: { nullable: false, foreignKeyName: userbyproject_usertype_fk, references: usertype(id)}}
+
+  - changeSet:
+            id: createTable-taskstatus
+            author: Aleksander Kuznetsov
+            changes:
+              - createTable:
+                  tableName: taskstatus
+                  columns:
+                    - column: { name: id, type: INT, autoIncrement: true, constraints: { nullable: false, primaryKey: true, primaryKeyName: taskstatus_id_pk } }
+                    - column: { name: name, type: VARCHAR(100) }
+                    - column: { name: description, type: VARCHAR(100) }
+
+  - changeSet:
+      id: createTable-task
+      author: Aleksander Kuznetsov
+      changes:
+        - createTable:
+            tableName: task
+            columns:
+              - column: { name: id, type: INT, autoIncrement: true, constraints: { nullable: false, primaryKey: true, primaryKeyName: task_id_pk } }
+              - column: { name: name, type: VARCHAR(100) }
+              - column: { name: taskstatus_id, type: INT, constraints: { nullable: false, foreignKeyName: task_taskstatus_fk, references: taskstatus(id) } }
+              - column: { name: release_id, type: INT, constraints: { nullable: false, foreignKeyName: task_release_fk, references: release(id) } }
+              - column: { name: author_id, type: INT, constraints: { nullable: false, foreignKeyName: task_author_fk, references: userbyproject(id) } }
+              - column: { name: contractor_id, type: INT, constraints: { nullable: false, foreignKeyName: task_contractor_fk, references: userbyproject(id) } }
+
+
+  - changeSet:
       id: createTable-project
       author: Aleksander Kuznetsov
       changes:
