@@ -1,10 +1,7 @@
 package ru.alex.kuznetsov.project.simbirsoft.util;
 
 import ru.alex.kuznetsov.project.simbirsoft.dto.*;
-import ru.alex.kuznetsov.project.simbirsoft.entity.ProjectEntity;
-import ru.alex.kuznetsov.project.simbirsoft.entity.ReleaseEntity;
-import ru.alex.kuznetsov.project.simbirsoft.entity.TaskStatusEntity;
-import ru.alex.kuznetsov.project.simbirsoft.entity.UsersTypeEntity;
+import ru.alex.kuznetsov.project.simbirsoft.entity.*;
 
 public class CommonMapper {
 
@@ -68,7 +65,32 @@ public class CommonMapper {
         responseDto.setId(usersType.getId());
         responseDto.setName(usersType.getName());
         responseDto.setDescription(usersType.getDescription());
+
         return responseDto;
+    }
+
+        public static UsersEntity fromUsersRequestDtoToUsersEntity(UserRequestDto requestDto) {
+            UsersEntity user = new UsersEntity();
+            user.setId(requestDto.getId());
+            user.setName(requestDto.getName());
+            user.setSurname(requestDto.getSurname());
+            user.setMiddlename(requestDto.getMiddlename());
+            user.setLogin(requestDto.getNickname());
+            user.setPassword(requestDto.getPassword());
+            return user;
+        }
+
+        public UserResponseDto fromUserEntityToUserResponseDto(UsersEntity usersType) {
+            UserResponseDto responseDto = new UserResponseDto();
+            responseDto.setId(usersType.getId());
+            responseDto.setName(usersType.getName());
+            responseDto.setSurname(usersType.getSurname());
+            responseDto.setMiddlename(usersType.getMiddlename());
+            responseDto.setNickname(usersType.getLogin());
+            responseDto.setPassword(usersType.getPassword());
+            responseDto.setUserTypeId(usersType.getUsersTypeUsers().getId());
+            return responseDto;
+
     }
 //    public static ProjectEntity fromProjectRequestDtoToProjectEntity(ProjectRequestDto requestDto) {
 //        ProjectEntity project = new ProjectEntity();
