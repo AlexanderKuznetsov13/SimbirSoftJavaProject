@@ -3,6 +3,7 @@ package ru.alex.kuznetsov.project.simbirsoft.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Schema(description = "Релиз")
@@ -18,20 +19,20 @@ public class ReleaseRequestDto {
     private Integer projectId;
 
     @Schema(description = "Дата начала релиза")
-    private Date dateStart;
+    private LocalDateTime startWorkTime;
 
     @Schema(description = "Дата конца релиза")
-    private Date dateEnd;
+    private LocalDateTime completeWorkTime;
 
     public ReleaseRequestDto() {
     }
 
-    public ReleaseRequestDto(Integer id, Integer name, Integer projectId, Date dateStart, Date dateEnd) {
+    public ReleaseRequestDto(Integer id, Integer name, Integer projectId, LocalDateTime startWorkTime, LocalDateTime completeWorkTime) {
         this.id = id;
         this.name = name;
         this.projectId = projectId;
-        this.dateStart = dateStart;
-        this.dateEnd = dateEnd;
+        this.startWorkTime = startWorkTime;
+        this.completeWorkTime = completeWorkTime;
     }
 
     public Integer getId() {
@@ -58,20 +59,20 @@ public class ReleaseRequestDto {
         this.projectId = projectId;
     }
 
-    public Date getDateStart() {
-        return dateStart;
+    public LocalDateTime getStartWorkTime() {
+        return startWorkTime;
     }
 
-    public void setDateStart(Date dateStart) {
-        this.dateStart = dateStart;
+    public void setStartWorkTime(LocalDateTime startWorkTime) {
+        this.startWorkTime = startWorkTime;
     }
 
-    public Date getDateEnd() {
-        return dateEnd;
+    public LocalDateTime getCompleteWorkTime() {
+        return completeWorkTime;
     }
 
-    public void setDateEnd(Date dateEnd) {
-        this.dateEnd = dateEnd;
+    public void setCompleteWorkTime(LocalDateTime completeWorkTime) {
+        this.completeWorkTime = completeWorkTime;
     }
 
     @Override
@@ -80,8 +81,8 @@ public class ReleaseRequestDto {
                 "id=" + id +
                 ", name=" + name +
                 ", projectId=" + projectId +
-                ", dateStart=" + dateStart +
-                ", dateEnd=" + dateEnd +
+                ", startWorkTime=" + startWorkTime +
+                ", completeWorkTime=" + completeWorkTime +
                 '}';
     }
 }

@@ -24,7 +24,7 @@ public class ReleaseEntity {
     private LocalDateTime startWorkTime;
 
     @Column(name = "complete_work_time")
-    private LocalDateTime completeWork_time;
+    private LocalDateTime completeWorkTime;
 
     @OneToMany(mappedBy = "releaseTask")
     private List<TaskEntity> tasks;
@@ -33,12 +33,12 @@ public class ReleaseEntity {
     public ReleaseEntity(){
     }
 
-    public ReleaseEntity(Integer id, String name, ProjectEntity projectRelease, LocalDateTime startWorkTime, LocalDateTime completeWork_time, List<TaskEntity> tasks) {
+    public ReleaseEntity(Integer id, String name, ProjectEntity projectRelease, LocalDateTime startWorkTime, LocalDateTime completeWorkTime, List<TaskEntity> tasks) {
         this.id = id;
         this.name = name;
         this.projectRelease = projectRelease;
         this.startWorkTime = startWorkTime;
-        this.completeWork_time = completeWork_time;
+        this.completeWorkTime = completeWorkTime;
         this.tasks = tasks;
     }
 
@@ -74,12 +74,12 @@ public class ReleaseEntity {
         this.startWorkTime = startWorkTime;
     }
 
-    public LocalDateTime getCompleteWork_time() {
-        return completeWork_time;
+    public LocalDateTime getCompleteWorkTime() {
+        return completeWorkTime;
     }
 
-    public void setCompleteWork_time(LocalDateTime completeWork_time) {
-        this.completeWork_time = completeWork_time;
+    public void setCompleteWorkTime(LocalDateTime completeWorkTime) {
+        this.completeWorkTime = completeWorkTime;
     }
 
     public List<TaskEntity> getTasks() {
