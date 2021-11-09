@@ -109,16 +109,25 @@ public class CommonMapper {
         return responseDto;
 
     }
-//    public static ProjectEntity fromProjectRequestDtoToProjectEntity(ProjectRequestDto requestDto) {
-//        ProjectEntity project = new ProjectEntity();
-//        return project;
-//    }
-//
-//    public ProjectResponseDto fromProjectEntityToProjectResponseDto(ProjectEntity release) {
-//        ProjectResponseDto responseDto = new ProjectResponseDto();
-//        return responseDto;
-//    }
 
+    public static TaskEntity fromTaskRequestDtoToTaskEntity(BoardTaskRequestDto requestDto) {
+        TaskEntity task = new TaskEntity();
+        task.setId(requestDto.getId());
+        task.setTitle(requestDto.getTitle());
+        task.setDescription(requestDto.getDescription());
+        return task;
+    }
 
+    public BoardTaskResponseDto fromTaskEntityToBoardTaskResponseDto(TaskEntity task) {
+        BoardTaskResponseDto responseDto = new BoardTaskResponseDto();
+        responseDto.setId(task.getId());
+        responseDto.setAuthorId(task.getAuthorUsersByProjectTask().getId());
+        responseDto.setContractorId(task.getContractorUsersByProjectTask().getId());
+        responseDto.setReleaseId(task.getReleaseTask().getId());
+        responseDto.setTaskStatus(task.getTaskStatusTask().getId());
+
+        return responseDto;
+
+    }
 }
 

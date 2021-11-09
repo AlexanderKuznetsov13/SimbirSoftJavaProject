@@ -83,7 +83,8 @@ databaseChangeLog:
             tableName: task
             columns:
               - column: { name: id, type: INT, autoIncrement: true, constraints: { nullable: false, primaryKey: true, primaryKeyName: task_id_pk } }
-              - column: { name: name, type: VARCHAR(100) }
+              - column: { name: title, type: VARCHAR(100) }
+              - column: { name: description, type: VARCHAR(1000) }
               - column: { name: taskstatus_id, type: INT, constraints: { nullable: false, foreignKeyName: task_taskstatus_fk, references: taskstatus(id) } }
               - column: { name: release_id, type: INT, constraints: { nullable: false, foreignKeyName: task_release_fk, references: release(id) } }
               - column: { name: author_id, type: INT, constraints: { nullable: false, foreignKeyName: task_author_fk, references: usersbyproject(id) } }
