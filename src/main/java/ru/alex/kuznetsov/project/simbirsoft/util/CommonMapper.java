@@ -92,6 +92,23 @@ public class CommonMapper {
             return responseDto;
 
     }
+
+    public static UsersByProjectEntity fromUsersByProjectRequestDtoToUsersByProjectEntity(UsersByProjectRequestDto requestDto) {
+        UsersByProjectEntity usersByProject = new UsersByProjectEntity();
+        usersByProject.setId(requestDto.getId());
+        return usersByProject;
+    }
+
+    public UsersByProjectResponseDto fromUsersByProjectEntityToUserByProjectResponseDto(UsersByProjectEntity usersByProject) {
+        UsersByProjectResponseDto responseDto = new UsersByProjectResponseDto();
+        responseDto.setId(usersByProject.getId());
+        responseDto.setUserId(usersByProject.getUsersUsersByProject().getId());
+        responseDto.setUsertypeId(usersByProject.getUsersTypeUsersByProject().getId());
+        responseDto.setProjectId(usersByProject.getProjectUsersByProject().getId());
+
+        return responseDto;
+
+    }
 //    public static ProjectEntity fromProjectRequestDtoToProjectEntity(ProjectRequestDto requestDto) {
 //        ProjectEntity project = new ProjectEntity();
 //        return project;
