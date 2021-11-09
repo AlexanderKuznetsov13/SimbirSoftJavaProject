@@ -1,11 +1,9 @@
 package ru.alex.kuznetsov.project.simbirsoft.util;
 
-import ru.alex.kuznetsov.project.simbirsoft.dto.ProjectRequestDto;
-import ru.alex.kuznetsov.project.simbirsoft.dto.ProjectResponseDto;
-import ru.alex.kuznetsov.project.simbirsoft.dto.ReleaseRequestDto;
-import ru.alex.kuznetsov.project.simbirsoft.dto.ReleaseResponseDto;
+import ru.alex.kuznetsov.project.simbirsoft.dto.*;
 import ru.alex.kuznetsov.project.simbirsoft.entity.ProjectEntity;
 import ru.alex.kuznetsov.project.simbirsoft.entity.ReleaseEntity;
+import ru.alex.kuznetsov.project.simbirsoft.entity.TaskStatusEntity;
 
 public class CommonMapper {
 
@@ -41,6 +39,21 @@ public class CommonMapper {
         responseDto.setDescription(project.getDescription());
         return responseDto;
     }
+
+    public static TaskStatusEntity fromTaskStasusRequestDtoToTaskStatusEntity(TaskStatusRequestDto requestDto) {
+        TaskStatusEntity taskStatus = new TaskStatusEntity();
+        taskStatus.setId(requestDto.getId());
+        taskStatus.setName(requestDto.getName());
+        return taskStatus;
+    }
+
+    public TaskStatusResponseDto fromTaskStatusEntityToTaskStatusResponseDto(TaskStatusEntity taskStatus) {
+        TaskStatusResponseDto responseDto = new TaskStatusResponseDto();
+        responseDto.setId(taskStatus.getId());
+        responseDto.setName(taskStatus.getName());
+        return responseDto;
+    }
+
 
 //    public static ProjectEntity fromProjectRequestDtoToProjectEntity(ProjectRequestDto requestDto) {
 //        ProjectEntity project = new ProjectEntity();
