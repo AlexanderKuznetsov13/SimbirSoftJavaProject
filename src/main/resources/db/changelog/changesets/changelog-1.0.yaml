@@ -71,7 +71,6 @@ databaseChangeLog:
             tableName: usersbyproject
             columns:
               - column: {name: id, type: INT, autoIncrement: true, constraints: {nullable: false, primaryKey: true, primaryKeyName: usersbyproject_id_pk}}
-              - column: {name: name, type: VARCHAR(100)}
               - column: {name: project_id, type: INT, constraints: { nullable: false, foreignKeyName: userbyproject_project_fk, references: project(id)}}
               - column: {name: user_id, type: INT, constraints: { nullable: false, foreignKeyName: userbyproject_user_fk, references: users(id)}}
               - column: {name: usertype_id, type: INT, constraints: { nullable: false, foreignKeyName: userbyproject_usertype_fk, references: userstype(id)}}
