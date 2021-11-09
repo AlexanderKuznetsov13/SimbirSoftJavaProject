@@ -4,9 +4,7 @@ import org.springframework.stereotype.Service;
 import ru.alex.kuznetsov.project.simbirsoft.dto.ReleaseRequestDto;
 import ru.alex.kuznetsov.project.simbirsoft.dto.ReleaseResponseDto;
 import ru.alex.kuznetsov.project.simbirsoft.exception.NoEntityException;
-import ru.alex.kuznetsov.project.simbirsoft.repository.ProjectRepository;
 import ru.alex.kuznetsov.project.simbirsoft.repository.ReleaseRepository;
-import ru.alex.kuznetsov.project.simbirsoft.repository.TaskRepository;
 import ru.alex.kuznetsov.project.simbirsoft.service.IReleaseService;
 import ru.alex.kuznetsov.project.simbirsoft.util.CommonMapper;
 
