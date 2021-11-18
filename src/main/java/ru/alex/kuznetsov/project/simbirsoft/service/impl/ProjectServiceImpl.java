@@ -1,5 +1,7 @@
 package ru.alex.kuznetsov.project.simbirsoft.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import ru.alex.kuznetsov.project.simbirsoft.dto.ProjectRequestDto;
 import ru.alex.kuznetsov.project.simbirsoft.dto.ProjectResponseDto;
@@ -13,6 +15,8 @@ import java.util.List;
 @Service
 public class ProjectServiceImpl implements IProjectService {
 
+    private final static Logger logger = LoggerFactory.getLogger(ProjectServiceImpl.class);
+
     private final ProjectRepository projectRepository;
 
     public ProjectServiceImpl(ProjectRepository projectRepository) {
@@ -21,6 +25,7 @@ public class ProjectServiceImpl implements IProjectService {
 
     @Override
     public ProjectResponseDto getById(Integer id) {
+        logger.debug(String.format("getById - Project with ID = %d not found", id));
         projectRepository.findById(id).orElseThrow(() -> new NoEntityException("Project not found"));
         return CommonMapper.fromProjectEntityToProjectResponseDto(projectRepository.getById(id));
     }
