@@ -3,6 +3,8 @@ package ru.alex.kuznetsov.project.simbirsoft.service;
 import ru.alex.kuznetsov.project.simbirsoft.dto.ReleaseRequestDto;
 import ru.alex.kuznetsov.project.simbirsoft.dto.ReleaseResponseDto;
 
+import java.util.List;
+
 public interface IReleaseService {
 
     /**
@@ -31,4 +33,10 @@ public interface IReleaseService {
      * @param id id release
      */
     void deleteById(Integer id);
+
+    /**
+     * get all release
+     * @return list release
+     */
+    List<ReleaseResponseDto> getAll();
 }

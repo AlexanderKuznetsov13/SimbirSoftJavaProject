@@ -3,12 +3,14 @@ package ru.alex.kuznetsov.project.simbirsoft.service.impl;
 import org.springframework.stereotype.Service;
 import ru.alex.kuznetsov.project.simbirsoft.dto.TaskStatusRequestDto;
 import ru.alex.kuznetsov.project.simbirsoft.dto.TaskStatusResponseDto;
+import ru.alex.kuznetsov.project.simbirsoft.entity.TaskStatusEntity;
 import ru.alex.kuznetsov.project.simbirsoft.exception.NoEntityException;
 import ru.alex.kuznetsov.project.simbirsoft.repository.TaskStatusRepository;
 import ru.alex.kuznetsov.project.simbirsoft.service.ITasksStatusServise;
 import ru.alex.kuznetsov.project.simbirsoft.util.CommonMapper;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TasksStatusServiceImpl implements ITasksStatusServise {
@@ -21,20 +23,37 @@ public class TasksStatusServiceImpl implements ITasksStatusServise {
 
     @Override
     public TaskStatusResponseDto getById(Integer id) {
-        taskStatusRepository.findById(id).orElseThrow(() -> new NoEntityException("TaskStatus not found"));
-        return CommonMapper.fromTaskStatusEntityToTaskStatusResponseDto(taskStatusRepository.getById(id));
+        System.out.println(String.format("getById - get taskStatus with %id",id));
+        TaskStatusEntity taskStatus = taskStatusRepository.findById(id).orElseThrow(() -> new NoEntityException(String.format("TaskStatus with ID = %d not found", id)));
+        return CommonMapper.fromTaskStatusEntityToTaskStatusResponseDto(taskStatus);
     }
 
     @Override
-    public TaskStatusResponseDto create(TaskStatusRequestDto requestDto) {        return null;    }
+    public TaskStatusResponseDto create(TaskStatusRequestDto requestDto) {
+        System.out.println(String.format("create - create taskStatus"));
+        TaskStatusEntity taskStatus = CommonMapper.fromTaskStasusRequestDtoToTaskStatusEntity(requestDto);
+        return CommonMapper.fromTaskStatusEntityToTaskStatusResponseDto(taskStatusRepository.save(taskStatus));
+    }
 
     @Override
-    public TaskStatusResponseDto update(TaskStatusRequestDto requestDto) {        return null;    }
+    public TaskStatusResponseDto update(TaskStatusRequestDto requestDto) {
+        TaskStatusEntity taskStatus = CommonMapper.fromTaskStasusRequestDtoToTaskStatusEntity(requestDto);
+        System.out.println(String.format("update - update taskStatus with %id", taskStatus.getId()));
+        return CommonMapper.fromTaskStatusEntityToTaskStatusResponseDto(taskStatusRepository.save(taskStatus));
+    }
 
     @Override
-    public List<TaskStatusResponseDto> getAll() {        return null;    }
-
+    public List<TaskStatusResponseDto> getAll() {
+        System.out.println(String.format("getAll - retrieve all taskStatus"));
+        return taskStatusRepository.findAll().stream().map(CommonMapper::fromTaskStatusEntityToTaskStatusResponseDto).collect(Collectors.toList());
+    }
 
     @Override
-    public void deleteById(Integer id) {    }
+    public void deleteById(Integer id) {
+        taskStatusRepository.findById(id).orElseThrow(() -> {
+            System.out.println(String.format("deleteById - TaskStatus with ID = %d not found", id));
+            return new NoEntityException(String.format("TaskStatus with ID = %d not found", id));
+        });
+        taskStatusRepository.deleteById(id);
+    }
 }

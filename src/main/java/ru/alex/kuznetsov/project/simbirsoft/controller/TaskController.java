@@ -2,14 +2,14 @@ package ru.alex.kuznetsov.project.simbirsoft.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.http.HttpStatus;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.alex.kuznetsov.project.simbirsoft.dto.BoardTaskRequestDto;
 import ru.alex.kuznetsov.project.simbirsoft.dto.BoardTaskResponseDto;
+import ru.alex.kuznetsov.project.simbirsoft.service.ITasksService;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @Tag(name = "Управление задачами")
@@ -17,41 +17,44 @@ import java.util.List;
 @RequestMapping(value = "/task", produces = "application/json;charset=UTF-8")
 public class TaskController {
 
-    private final List<BoardTaskResponseDto> taskList = new ArrayList<>();
-    private int indexList = 0;
+    @Autowired
+    ITasksService tasksService;
 
     @Operation(summary = "Получить задачу по ID")
-    @GetMapping("/{taskId}")
-    @ResponseBody
-    public ResponseEntity<BoardTaskResponseDto> getTaskByTaskId(@PathVariable Integer taskId) {
-        BoardTaskResponseDto boardTask = null;
-        for (int i = 0; i < taskList.size(); i++) {
-            boardTask = taskList.get(i);
-            if (boardTask.getId() == taskId) {
-                return new ResponseEntity<>(boardTask, HttpStatus.OK);
-            }
-        }
-        return new ResponseEntity<>(boardTask, HttpStatus.NOT_FOUND);
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<BoardTaskResponseDto> getTaskById(@PathVariable Integer id) {
+           BoardTaskResponseDto responseDto = tasksService.getById(id);
+           return ResponseEntity.ok().body(responseDto);
     }
 
     @Operation(summary = "Создать задачу")
-    @PostMapping
-    @ResponseBody
-    public ResponseEntity<BoardTaskRequestDto> createTask(@RequestBody BoardTaskRequestDto boardTask) {
-//        todo copy to service layer and use model of task for request and response DTO
-//        boardTask.setId(indexList + 1);
-//        taskList.add(boardTask);
-//        indexList++;
-        return new ResponseEntity<>(boardTask, HttpStatus.OK);
+    @PostMapping(value = "/create")
+    public ResponseEntity<BoardTaskResponseDto> createTask(@RequestBody BoardTaskRequestDto requestDto) {
+        BoardTaskResponseDto responseDto = tasksService.create(requestDto);
+        return ResponseEntity.ok().body(responseDto);
     }
 
     @Operation(summary = "вывести все задачи")
     @GetMapping("/all")
-    @ResponseBody
-    public ResponseEntity<List<BoardTaskResponseDto>> findAll() {
-        return new ResponseEntity<>(taskList, HttpStatus.OK);
+    public ResponseEntity<List<BoardTaskResponseDto>> getAllTasks() {
+        List<BoardTaskResponseDto> list = tasksService.getAll();
+        return ResponseEntity.ok().body(list);
     }
 
+    @Operation(summary = "Изменить задачу")
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<BoardTaskResponseDto> updateTask(@PathVariable Integer id, @RequestBody BoardTaskRequestDto requestDto) {
+        requestDto.setId(id);
+        BoardTaskResponseDto responseDto = tasksService.update(requestDto);
+        return ResponseEntity.ok().body(responseDto);
+    }
+
+    @Operation(summary = "Удалить задачу")
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity deleteRelease(@PathVariable Integer id) {
+         tasksService.deleteById(id);
+         return ResponseEntity.ok().build();
+    }
 
     @ExceptionHandler(IOException.class)
     public ResponseEntity handleIOException(IOException e) {
