@@ -2,14 +2,10 @@ package ru.alex.kuznetsov.project.simbirsoft.service.impl;
 
 
 import org.springframework.stereotype.Service;
-import ru.alex.kuznetsov.project.simbirsoft.dto.UserRequestDto;
-import ru.alex.kuznetsov.project.simbirsoft.dto.UserResponseDto;
 import ru.alex.kuznetsov.project.simbirsoft.dto.UserTypeRequestDto;
 import ru.alex.kuznetsov.project.simbirsoft.dto.UserTypeResponseDto;
-import ru.alex.kuznetsov.project.simbirsoft.entity.UsersEntity;
 import ru.alex.kuznetsov.project.simbirsoft.entity.UsersTypeEntity;
 import ru.alex.kuznetsov.project.simbirsoft.exception.NoEntityException;
-import ru.alex.kuznetsov.project.simbirsoft.repository.ReleaseRepository;
 import ru.alex.kuznetsov.project.simbirsoft.repository.UsersTypeRepository;
 import ru.alex.kuznetsov.project.simbirsoft.service.IUserTypeService;
 import ru.alex.kuznetsov.project.simbirsoft.util.CommonMapper;

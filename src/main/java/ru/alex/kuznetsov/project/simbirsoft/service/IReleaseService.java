@@ -39,4 +39,11 @@ public interface IReleaseService {
      * @return list release
      */
     List<ReleaseResponseDto> getAll();
+
+    /**
+     * get  count of uncompleted tasks by id release
+     * @param id id release
+     * @return list tasks
+     */
+    Integer getQtyUncompletedTasksById(Integer id);
 }
