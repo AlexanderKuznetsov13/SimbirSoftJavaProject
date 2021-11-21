@@ -19,7 +19,6 @@ import ru.alex.kuznetsov.project.simbirsoft.service.IProjectService;
 import ru.alex.kuznetsov.project.simbirsoft.util.CommonMapper;
 
 import java.util.List;
-import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 @Service
@@ -48,7 +47,7 @@ public class ProjectServiceImpl implements IProjectService {
 
     @Override
     public ProjectResponseDto create(ProjectRequestDto requestDto) {
-        System.out.println(String.format("create - create project"));
+        logger.debug(String.format("create - create project"));
         ProjectEntity project = CommonMapper.fromProjectRequestDtoToProjectEntity(requestDto);
         return CommonMapper.fromProjectEntityToProjectResponseDto(projectRepository.save(project));
     }
@@ -63,18 +62,18 @@ public class ProjectServiceImpl implements IProjectService {
             List<TaskEntity> list = taskRepository.findUnfinishedTasksByProject(projectId);
             if (list.size() > 0) {
                 logger.error("update - cannot completed project with unfinished tasks");
-                throw new UnfinishedTaskException(ResourceBundle.getBundle("resource").getString("unfinishedTasks"));
+                throw new UnfinishedTaskException("update - cannot completed project with unfinished tasks");
             }
         }
 
         ProjectEntity project = CommonMapper.fromProjectRequestDtoToProjectEntity(requestDto);
-        System.out.println(String.format("update - update project with %id", project.getId()));
+        logger.debug(String.format("update - update project with %id", project.getId()));
         return CommonMapper.fromProjectEntityToProjectResponseDto(projectRepository.save(project));
     }
 
     @Override
     public List<ProjectResponseDto> getAll() {
-        System.out.println(String.format("getAll - retrieve all projects"));
+        logger.debug(String.format("getAll - retrieve all projects"));
         return projectRepository.findAll().stream().map(CommonMapper::fromProjectEntityToProjectResponseDto).collect(Collectors.toList());
     }
 
@@ -100,7 +99,7 @@ public class ProjectServiceImpl implements IProjectService {
     @Override
     public void deleteById(Integer id) {
         projectRepository.findById(id).orElseThrow(() -> {
-            System.out.println(String.format("deleteById - Project with ID = %d not found", id));
+            logger.debug(String.format("deleteById - Project with ID = %d not found", id));
             return new NoEntityException(String.format("Project with ID = %d not found", id));
         });
         projectRepository.deleteById(id);

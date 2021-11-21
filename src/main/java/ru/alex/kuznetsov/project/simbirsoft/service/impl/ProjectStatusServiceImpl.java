@@ -28,7 +28,7 @@ public class ProjectStatusServiceImpl implements IProjectStatusService {
 
     @Override
     public List<ProjectStatusResponseDto> getAll() {
-        System.out.println(String.format("getAll - retrieve all projectsStatus"));
+        logger.debug(String.format("getAll - retrieve all projectsStatus"));
         return projectStatusRepository.findAll().stream().map(CommonMapper::fromProjectStatusEntityToProjectStatusResponseDto).collect(Collectors.toList());
     }
 
@@ -41,7 +41,7 @@ public class ProjectStatusServiceImpl implements IProjectStatusService {
 
     @Override
     public ProjectStatusResponseDto create(ProjectStatusRequestDto requestDto) {
-        System.out.println(String.format("create - create projectStatus"));
+        logger.debug(String.format("create - create projectStatus"));
         ProjectStatusEntity project = CommonMapper.fromProjectStatusRequestDtoToProjectStatusEntity(requestDto);
         return CommonMapper.fromProjectStatusEntityToProjectStatusResponseDto(projectStatusRepository.save(project));
     }
@@ -49,7 +49,7 @@ public class ProjectStatusServiceImpl implements IProjectStatusService {
     @Override
     public ProjectStatusResponseDto update(ProjectStatusRequestDto requestDto) {
         ProjectStatusEntity projectStatus = CommonMapper.fromProjectStatusRequestDtoToProjectStatusEntity(requestDto);
-        System.out.println(String.format("update - update projectStatus with %id", projectStatus.getId()));
+        logger.debug(String.format("update - update projectStatus with %id", projectStatus.getId()));
         return CommonMapper.fromProjectStatusEntityToProjectStatusResponseDto(projectStatusRepository.save(projectStatus));
 
     }
@@ -57,7 +57,7 @@ public class ProjectStatusServiceImpl implements IProjectStatusService {
     @Override
     public void deleteById(Integer id) {
         projectStatusRepository.findById(id).orElseThrow(() -> {
-            System.out.println(String.format("deleteById - Project with ID = %d not found", id));
+            logger.debug(String.format("deleteById - Project with ID = %d not found", id));
             return new NoEntityException(String.format("Project with ID = %d not found", id));
         });
         projectStatusRepository.deleteById(id);
