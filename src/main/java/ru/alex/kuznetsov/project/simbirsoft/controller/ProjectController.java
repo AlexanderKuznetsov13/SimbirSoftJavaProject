@@ -52,6 +52,12 @@ public class ProjectController {
         return ResponseEntity.ok().body(projectService.getTasksProject(id));
     }
 
+    @Operation(summary = "Получить список релизов по проекту")
+    @GetMapping(value = "/{id}/releases")
+    public ResponseEntity<List<ReleaseResponseDto>> getReleasesProject(@PathVariable Integer id) {
+        logger.info(String.format("GET /project/{id}/releases id = %d", id));
+        return ResponseEntity.ok().body(projectService.getReleasesProject(id));
+    }
 
     @Operation(summary = "Удалить проект")
     @DeleteMapping(value = "/{id}")
