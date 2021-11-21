@@ -24,6 +24,10 @@ public class ProjectEntity {
     @OneToMany(mappedBy = "projectUsersByProject")
     private List<UsersByProjectEntity> usersByProjects;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "projectstatus_id", nullable = false)
+    private ProjectStatusEntity projectStatusProject;
+
     public ProjectEntity() {
     }
 

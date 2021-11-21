@@ -1,8 +1,10 @@
 package ru.alex.kuznetsov.project.simbirsoft.service;
 
 
+import ru.alex.kuznetsov.project.simbirsoft.dto.BoardTaskResponseDto;
 import ru.alex.kuznetsov.project.simbirsoft.dto.ProjectRequestDto;
 import ru.alex.kuznetsov.project.simbirsoft.dto.ProjectResponseDto;
+import ru.alex.kuznetsov.project.simbirsoft.dto.ReleaseResponseDto;
 
 import java.util.List;
 
@@ -36,6 +38,20 @@ public interface IProjectService {
      * @return list projects
      */
     List<ProjectResponseDto> getAll();
+
+    /**
+     * get all releases by id project
+     * @param id id project
+     * @return list releases
+     */
+    List<ReleaseResponseDto> getReleasesProject(Integer id);
+
+    /**
+     * get all tasks by id project
+     * @param id id project
+     * @return list tasks
+     */
+    List<BoardTaskResponseDto> getTasksProject(Integer id);
 
     /**
      * delete project by his id

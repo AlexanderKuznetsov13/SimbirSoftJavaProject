@@ -22,6 +22,17 @@ databaseChangeLog:
               - column: { name: name, type: VARCHAR(100) }
               - column: { name: description, type: VARCHAR(100) }
 
+  - changeSet:
+      id: createTable-projectstatus
+      author: Aleksander Kuznetsov
+      changes:
+        - createTable:
+            tableName: projectstatus
+            columns:
+              - column: { name: id, type: INT, autoIncrement: true, constraints: { nullable: false, primaryKey: true, primaryKeyName: projectstatus_id_pk } }
+              - column: { name: name, type: VARCHAR(100) }
+              - column: { name: description, type: VARCHAR(100) }
+
 
   - changeSet:
       id: createTable-project
@@ -32,6 +43,7 @@ databaseChangeLog:
             columns:
               - column: {name: id, type: INT, autoIncrement: true, constraints: {nullable: false, primaryKey: true, primaryKeyName: project_id_pk}}
               - column: {name: name, type: VARCHAR(100)}
+              - column: { name: projectstatus_id, type: INT, constraints: { nullable: false, foreignKeyName: project_projectstatus_fk, references: projectstatus(id) } }
               - column: {name: description, type: VARCHAR(100)}
 
   - changeSet:
@@ -89,5 +101,4 @@ databaseChangeLog:
               - column: { name: release_id, type: INT, constraints: { nullable: false, foreignKeyName: task_release_fk, references: release(id) } }
               - column: { name: author_id, type: INT, constraints: { nullable: false, foreignKeyName: task_author_fk, references: usersbyproject(id) } }
               - column: { name: contractor_id, type: INT, constraints: { nullable: false, foreignKeyName: task_contractor_fk, references: usersbyproject(id) } }
-
 
