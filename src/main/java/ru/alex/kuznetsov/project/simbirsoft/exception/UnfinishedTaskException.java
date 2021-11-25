@@ -10,6 +10,14 @@ public class UnfinishedTaskException  extends RuntimeException {
         }
 
         public UnfinishedTaskException(String message) {
-        super(message);
+                super(message);
+        }
+
+        public UnfinishedTaskException (Throwable cause) {
+                super (cause);
+        }
+
+        public UnfinishedTaskException (String message, Throwable cause) {
+                super (message, cause);
         }
 }
