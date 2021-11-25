@@ -21,8 +21,11 @@ public class UserController {
 
     private final Logger logger = LoggerFactory.getLogger(UserController.class);
 
-    @Autowired
-    IUserService userService;
+    private final IUserService userService;
+
+    public UserController(IUserService userService) {
+        this.userService = userService;
+    }
 
     @Operation(summary = "Создать пользователя")
     @PostMapping(value = "/create")

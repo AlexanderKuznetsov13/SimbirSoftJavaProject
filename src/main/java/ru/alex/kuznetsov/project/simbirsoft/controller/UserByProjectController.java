@@ -21,8 +21,11 @@ public class UserByProjectController {
 
     private final Logger logger = LoggerFactory.getLogger(UserByProjectController.class);
 
-    @Autowired
-    IUsersByProjectService usersByProjectService;
+    private final IUsersByProjectService usersByProjectService;
+
+    public UserByProjectController(IUsersByProjectService usersByProjectService) {
+        this.usersByProjectService = usersByProjectService;
+    }
 
     @Operation(summary = "Создать тип пользователя в проекте")
     @PostMapping(value = "/create")

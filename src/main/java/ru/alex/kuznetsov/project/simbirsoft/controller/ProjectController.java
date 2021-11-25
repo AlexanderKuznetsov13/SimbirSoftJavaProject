@@ -24,8 +24,11 @@ public class ProjectController {
 
     private final Logger logger = LoggerFactory.getLogger(ProjectController.class);
 
-    @Autowired
-    IProjectService projectService;
+    private final IProjectService projectService;
+
+    public ProjectController(IProjectService projectService) {
+        this.projectService = projectService;
+    }
 
     @Operation(summary = "Создать проект")
     @PostMapping(value = "/create")

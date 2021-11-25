@@ -20,8 +20,11 @@ public class TaskStatusController {
 
     private final Logger logger = LoggerFactory.getLogger(TaskStatusController.class);
 
-    @Autowired
-    ITasksStatusServise tasksStatusService;
+    private final ITasksStatusServise tasksStatusService;
+
+    public TaskStatusController(ITasksStatusServise tasksStatusService) {
+        this.tasksStatusService = tasksStatusService;
+    }
 
     @Operation(summary = "Создать статус задачу")
     @PostMapping(value = "/create")

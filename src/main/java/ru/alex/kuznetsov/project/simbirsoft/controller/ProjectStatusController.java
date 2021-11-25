@@ -21,8 +21,11 @@ public class ProjectStatusController {
 
     private final Logger logger = LoggerFactory.getLogger(ProjectStatusController.class);
 
-    @Autowired
-    IProjectStatusService projectStatusService;
+    private final IProjectStatusService projectStatusService;
+
+    public ProjectStatusController(IProjectStatusService projectStatusService) {
+        this.projectStatusService = projectStatusService;
+    }
 
     @Operation(summary = "Создать статус проект")
     @PostMapping(value = "/create")

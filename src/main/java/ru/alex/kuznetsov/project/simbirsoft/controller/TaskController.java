@@ -21,8 +21,11 @@ public class TaskController {
 
     private final Logger logger = LoggerFactory.getLogger(TaskController.class);
 
-    @Autowired
-    ITasksService tasksService;
+    private final ITasksService tasksService;
+
+    public TaskController(ITasksService tasksService) {
+        this.tasksService = tasksService;
+    }
 
     @Operation(summary = "Получить задачу по ID")
     @GetMapping(value = "/{id}")

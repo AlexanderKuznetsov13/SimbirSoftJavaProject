@@ -21,8 +21,11 @@ public class ReleaseController {
 
     private final Logger logger = LoggerFactory.getLogger(ReleaseController.class);
 
-    @Autowired
-    IReleaseService releaseService;
+    private final IReleaseService releaseService;
+
+    public ReleaseController(IReleaseService releaseService) {
+        this.releaseService = releaseService;
+    }
 
 
     @Operation(summary = "Количество задач незавершенных в заданный релиз")
