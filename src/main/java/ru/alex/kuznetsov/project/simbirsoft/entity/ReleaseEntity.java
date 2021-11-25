@@ -3,7 +3,7 @@ package ru.alex.kuznetsov.project.simbirsoft.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "release")
@@ -27,13 +27,13 @@ public class ReleaseEntity {
     private LocalDateTime completeWorkTime;
 
     @OneToMany(mappedBy = "releaseTask")
-    private List<TaskEntity> tasks;
+    private Set<TaskEntity> tasks;
 
 
     public ReleaseEntity(){
     }
 
-    public ReleaseEntity(Integer id, String name, ProjectEntity projectRelease, LocalDateTime startWorkTime, LocalDateTime completeWorkTime, List<TaskEntity> tasks) {
+    public ReleaseEntity(Integer id, String name, ProjectEntity projectRelease, LocalDateTime startWorkTime, LocalDateTime completeWorkTime, Set<TaskEntity> tasks) {
         this.id = id;
         this.name = name;
         this.projectRelease = projectRelease;
@@ -82,11 +82,11 @@ public class ReleaseEntity {
         this.completeWorkTime = completeWorkTime;
     }
 
-    public List<TaskEntity> getTasks() {
+    public Set<TaskEntity> getTasks() {
         return tasks;
     }
 
-    public void setTasks(List<TaskEntity> tasks) {
+    public void setTasks(Set<TaskEntity> tasks) {
         this.tasks = tasks;
     }
 }

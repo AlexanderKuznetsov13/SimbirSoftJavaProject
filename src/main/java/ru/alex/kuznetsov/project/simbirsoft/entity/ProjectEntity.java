@@ -3,6 +3,7 @@ package ru.alex.kuznetsov.project.simbirsoft.entity;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "project")
@@ -19,10 +20,10 @@ public class ProjectEntity {
     private String description;
 
     @OneToMany(mappedBy = "projectRelease")
-    private List<ReleaseEntity> releases;
+    private Set<ReleaseEntity> releases;
 
     @OneToMany(mappedBy = "projectUsersByProject")
-    private List<UsersByProjectEntity> usersByProjects;
+    private Set<UsersByProjectEntity> usersByProjects;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "projectstatus_id", nullable = false)
@@ -31,12 +32,13 @@ public class ProjectEntity {
     public ProjectEntity() {
     }
 
-    public ProjectEntity(Integer id, String name, String description, List<ReleaseEntity> releases, List<UsersByProjectEntity> usersByProjects) {
+    public ProjectEntity(Integer id, String name, String description, Set<ReleaseEntity> releases, Set<UsersByProjectEntity> usersByProjects, ProjectStatusEntity projectStatusProject) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.releases = releases;
         this.usersByProjects = usersByProjects;
+        this.projectStatusProject = projectStatusProject;
     }
 
     public Integer getId() {
@@ -63,19 +65,27 @@ public class ProjectEntity {
         this.description = description;
     }
 
-    public List<ReleaseEntity> getReleases() {
+    public Set<ReleaseEntity> getReleases() {
         return releases;
     }
 
-    public void setReleases(List<ReleaseEntity> releases) {
+    public void setReleases(Set<ReleaseEntity> releases) {
         this.releases = releases;
     }
 
-    public List<UsersByProjectEntity> getUsersByProjects() {
+    public Set<UsersByProjectEntity> getUsersByProjects() {
         return usersByProjects;
     }
 
-    public void setUsersByProjects(List<UsersByProjectEntity> usersByProjects) {
+    public void setUsersByProjects(Set<UsersByProjectEntity> usersByProjects) {
         this.usersByProjects = usersByProjects;
+    }
+
+    public ProjectStatusEntity getProjectStatusProject() {
+        return projectStatusProject;
+    }
+
+    public void setProjectStatusProject(ProjectStatusEntity projectStatusProject) {
+        this.projectStatusProject = projectStatusProject;
     }
 }

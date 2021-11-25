@@ -2,7 +2,7 @@ package ru.alex.kuznetsov.project.simbirsoft.entity;
 
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "projectstatus")
@@ -16,16 +16,16 @@ public class ProjectStatusEntity {
     private String name;
 
     @OneToMany(mappedBy = "projectStatusProject")
-    private List<ProjectEntity> projects;
+    private Set<ProjectEntity> projects;
 
 
     public ProjectStatusEntity() {
     }
 
-    public ProjectStatusEntity(Integer id, String name, List<ProjectEntity> projects){
-    this.id = id;
-    this.name = name;
-    this.projects = projects;
+    public ProjectStatusEntity(Integer id, String name, Set<ProjectEntity> projects) {
+        this.id = id;
+        this.name = name;
+        this.projects = projects;
     }
 
     public Integer getId() {
@@ -44,11 +44,11 @@ public class ProjectStatusEntity {
         this.name = name;
     }
 
-    public List<ProjectEntity> getProjects() {
+    public Set<ProjectEntity> getProjects() {
         return projects;
     }
 
-    public void setProjects(List<ProjectEntity> project) {
+    public void setProjects(Set<ProjectEntity> projects) {
         this.projects = projects;
     }
 }

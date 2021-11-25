@@ -2,6 +2,7 @@ package ru.alex.kuznetsov.project.simbirsoft.entity;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "taskstatus")
@@ -15,12 +16,12 @@ public class TaskStatusEntity {
     private String name;
 
     @OneToMany(mappedBy = "taskStatusTask")
-    private List<TaskEntity> tasks;
+    private Set<TaskEntity> tasks;
 
     public TaskStatusEntity(){
     }
 
-    public TaskStatusEntity(Integer id, String name, List<TaskEntity> tasks) {
+    public TaskStatusEntity(Integer id, String name, Set<TaskEntity> tasks) {
         this.id = id;
         this.name = name;
         this.tasks = tasks;
@@ -42,11 +43,11 @@ public class TaskStatusEntity {
         this.name = name;
     }
 
-    public List<TaskEntity> getTasks() {
+    public Set<TaskEntity> getTasks() {
         return tasks;
     }
 
-    public void setTasks(List<TaskEntity> tasks) {
+    public void setTasks(Set<TaskEntity> tasks) {
         this.tasks = tasks;
     }
 }
