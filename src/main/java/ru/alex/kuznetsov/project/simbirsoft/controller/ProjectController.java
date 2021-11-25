@@ -5,13 +5,14 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.alex.kuznetsov.project.simbirsoft.dto.BoardTaskResponseDto;
 import ru.alex.kuznetsov.project.simbirsoft.dto.ProjectRequestDto;
 import ru.alex.kuznetsov.project.simbirsoft.dto.ProjectResponseDto;
 import ru.alex.kuznetsov.project.simbirsoft.dto.ReleaseResponseDto;
+import ru.alex.kuznetsov.project.simbirsoft.exception.NoEntityException;
+import ru.alex.kuznetsov.project.simbirsoft.exception.UnfinishedTaskException;
 import ru.alex.kuznetsov.project.simbirsoft.service.IProjectService;
 
 import java.io.IOException;
@@ -78,9 +79,9 @@ public class ProjectController {
         return ResponseEntity.ok().body(list);
     }
 
-    @ExceptionHandler(IOException.class)
+    @ExceptionHandler({UnfinishedTaskException.class, NoEntityException.class})
     public ResponseEntity handleIOException(IOException e) {
-        return ResponseEntity.badRequest().build();
+        return ResponseEntity.badRequest().body(e.getMessage());
     }
 }
 
