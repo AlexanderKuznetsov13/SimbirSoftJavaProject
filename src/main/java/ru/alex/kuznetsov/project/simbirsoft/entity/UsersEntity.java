@@ -29,7 +29,7 @@ public class UsersEntity {
     @Column(name = "password")
     private String password;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "usertype_id", nullable = false)
     private UsersTypeEntity usersTypeUsers;
 

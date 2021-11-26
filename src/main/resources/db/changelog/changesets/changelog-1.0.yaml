@@ -102,3 +102,64 @@ databaseChangeLog:
               - column: { name: author_id, type: INT, constraints: { nullable: false, foreignKeyName: task_author_fk, references: usersbyproject(id) } }
               - column: { name: contractor_id, type: INT, constraints: { nullable: false, foreignKeyName: task_contractor_fk, references: usersbyproject(id) } }
 
+  - changeSet:
+      id: insert-rows-usertype-table
+      author: Aleksander Kuznetsov
+      comment: "insert default values for roles"
+      changes:
+        - insert:
+            tableName: userstype
+            columns:
+              - column:
+                  name: name
+                  value: "ROLE_ADMIN"
+              - column:
+                  name: description
+                  value: "Admin description"
+        - insert:
+            tableName: userstype
+            columns:
+              - column:
+                  name: name
+                  value: "ROLE_USER"
+              - column:
+                  name: description
+                  value: "user description"
+        - insert:
+            tableName: userstype
+            columns:
+              - column:
+                  name: name
+                  value: "ROLE_CUSTOMER"
+              - column:
+                  name: description
+                  value: "customer description"
+  - changeSet:
+      id: insert-user-table
+      author: Aleksander Kuznetsov
+      comment: "insert default users"
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: name
+                  value: "user1"
+              - column:
+                  name: surname
+                  value: "user1 surname"
+              - column:
+                  name: middlename
+                  value: "user1 middlename"
+              - column:
+                  name: email
+                  value: "user1@email.com"
+              - column:
+                  name: login
+                  value: "user1"
+              - column:
+                  name: password
+                  value: "$2a$10$XJVMrYZw4z1K7CjSKBNKjuluWNarRnJaZZF0EUrm0o/b2VfwcjoyS" #user1
+              - column:
+                  name: usertype_id
+                  value: 1

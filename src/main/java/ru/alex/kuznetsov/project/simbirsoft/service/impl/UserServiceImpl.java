@@ -3,6 +3,7 @@ package ru.alex.kuznetsov.project.simbirsoft.service.impl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.alex.kuznetsov.project.simbirsoft.dto.UserRequestDto;
 import ru.alex.kuznetsov.project.simbirsoft.dto.UserResponseDto;
@@ -21,8 +22,11 @@ public class UserServiceImpl implements IUserService {
     private final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     private final UsersRepository usersRepository;
-    public UserServiceImpl(UsersRepository usersRepository) {
+    private final PasswordEncoder passwordEncoder;
+
+    public UserServiceImpl(UsersRepository usersRepository, PasswordEncoder passwordEncoder) {
         this.usersRepository = usersRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -59,5 +63,19 @@ public class UserServiceImpl implements IUserService {
             return new NoEntityException(String.format("User with ID = %d not found", id));
         });
         usersRepository.deleteById(id);
+    }
+
+    public UsersEntity findByLogin(String login) {
+        return usersRepository.findUsersEntitiesByLogin(login);
+    }
+
+    public UsersEntity findByLoginAndPassword(String login, String password) {
+        UsersEntity userEntity = findByLogin(login);
+        if (userEntity != null) {
+            if (passwordEncoder.matches(password, userEntity.getPassword())) {
+                return userEntity;
+            }
+        }
+        return null;
     }
 }

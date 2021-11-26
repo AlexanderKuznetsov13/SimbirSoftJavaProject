@@ -2,6 +2,7 @@ package ru.alex.kuznetsov.project.simbirsoft.service;
 
 import ru.alex.kuznetsov.project.simbirsoft.dto.UserRequestDto;
 import ru.alex.kuznetsov.project.simbirsoft.dto.UserResponseDto;
+import ru.alex.kuznetsov.project.simbirsoft.entity.UsersEntity;
 
 import java.util.List;
 
@@ -18,6 +19,21 @@ public interface IUserService {
      * @return user
      */
     UserResponseDto getById(Integer id);
+
+    /**
+     * get UserEntity by its login
+     * @param login
+     * @return
+     */
+    UsersEntity findByLogin(String login);
+
+    /**
+     * get UserEntity by its login and password
+     * @param login
+     * @param password
+     * @return
+     */
+    UsersEntity findByLoginAndPassword(String login, String password);
 
     /**
      * create new user
