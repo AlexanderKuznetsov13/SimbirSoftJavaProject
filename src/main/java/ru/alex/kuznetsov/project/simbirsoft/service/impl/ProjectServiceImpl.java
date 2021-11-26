@@ -15,6 +15,8 @@ import ru.alex.kuznetsov.project.simbirsoft.repository.ProjectRepository;
 import ru.alex.kuznetsov.project.simbirsoft.repository.ProjectStatusRepository;
 import ru.alex.kuznetsov.project.simbirsoft.repository.ReleaseRepository;
 import ru.alex.kuznetsov.project.simbirsoft.repository.TaskRepository;
+import ru.alex.kuznetsov.project.simbirsoft.repository.filter.Condition;
+import ru.alex.kuznetsov.project.simbirsoft.repository.filter.TaskFilter;
 import ru.alex.kuznetsov.project.simbirsoft.service.IProjectService;
 import ru.alex.kuznetsov.project.simbirsoft.util.CommonMapper;
 
@@ -103,6 +105,12 @@ public class ProjectServiceImpl implements IProjectService {
             return new NoEntityException(String.format("Project with ID = %d not found", id));
         });
         projectRepository.deleteById(id);
+    }
+
+    @Override
+    public List<BoardTaskResponseDto> getFilteredTasksProject(Integer id, List<Condition> conditions) {
+        TaskFilter filter = new TaskFilter(conditions);
+        return taskRepository.findAll(filter).stream().map(CommonMapper::fromTaskEntityToBoardTaskResponseDto).collect(Collectors.toList());
     }
 }
 

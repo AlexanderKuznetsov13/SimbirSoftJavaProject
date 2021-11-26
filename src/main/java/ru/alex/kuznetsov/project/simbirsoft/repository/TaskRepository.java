@@ -1,17 +1,17 @@
 package ru.alex.kuznetsov.project.simbirsoft.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import ru.alex.kuznetsov.project.simbirsoft.entity.ProjectEntity;
 import ru.alex.kuznetsov.project.simbirsoft.entity.TaskEntity;
 
 import java.util.List;
 
 
 @Repository
-public interface TaskRepository extends JpaRepository<TaskEntity, Integer> {
+public interface TaskRepository extends JpaRepository<TaskEntity, Integer>, JpaSpecificationExecutor<TaskEntity> {
 
     /**
      * find all tasks said release

@@ -5,6 +5,7 @@ import ru.alex.kuznetsov.project.simbirsoft.dto.BoardTaskResponseDto;
 import ru.alex.kuznetsov.project.simbirsoft.dto.ProjectRequestDto;
 import ru.alex.kuznetsov.project.simbirsoft.dto.ProjectResponseDto;
 import ru.alex.kuznetsov.project.simbirsoft.dto.ReleaseResponseDto;
+import ru.alex.kuznetsov.project.simbirsoft.repository.filter.Condition;
 
 import java.util.List;
 
@@ -58,5 +59,13 @@ public interface IProjectService {
      * @param id id project
      */
     void deleteById(Integer id);
+
+    /**
+     *
+     * @param id
+     * @param conditions
+     * @return
+     */
+    List<BoardTaskResponseDto> getFilteredTasksProject(Integer id, List<Condition> conditions);
 }
 

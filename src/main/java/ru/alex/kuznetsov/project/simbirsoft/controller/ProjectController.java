@@ -13,6 +13,7 @@ import ru.alex.kuznetsov.project.simbirsoft.dto.ProjectResponseDto;
 import ru.alex.kuznetsov.project.simbirsoft.dto.ReleaseResponseDto;
 import ru.alex.kuznetsov.project.simbirsoft.exception.NoEntityException;
 import ru.alex.kuznetsov.project.simbirsoft.exception.UnfinishedTaskException;
+import ru.alex.kuznetsov.project.simbirsoft.repository.filter.Condition;
 import ru.alex.kuznetsov.project.simbirsoft.service.IProjectService;
 
 import java.io.IOException;
@@ -61,6 +62,14 @@ public class ProjectController {
     public ResponseEntity<List<ReleaseResponseDto>> getReleasesProject(@PathVariable Integer id) {
         logger.info(String.format("GET /project/{id}/releases id = %d", id));
         return ResponseEntity.ok().body(projectService.getReleasesProject(id));
+    }
+
+    @Operation(summary = "Получить список задач проекта по фильтру")
+    @GetMapping(value = "/{id}/tasks/filter")
+    public ResponseEntity<List<BoardTaskResponseDto>> getFilteredTasksProject(@PathVariable Integer id, @RequestBody List<Condition> conditions) {
+        logger.info(String.format("GET /project/{id}/tasks/filter id = %d", id));
+        logger.debug("List conditions {}", conditions);
+        return ResponseEntity.ok().body(projectService.getFilteredTasksProject(id, conditions));
     }
 
     @Operation(summary = "Удалить проект")
