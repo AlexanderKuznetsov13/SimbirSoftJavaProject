@@ -15,13 +15,25 @@ public class ProjectResponseDto {
     @Schema(description = "Описание проекта")
     private String description;
 
+    @Schema(description = "ID статуса проекта")
+    private Integer projectStatusId;
+
     public ProjectResponseDto() {
     }
 
-    public ProjectResponseDto(Integer id, String name, String description) {
+    public ProjectResponseDto(Integer id, String name, String description, Integer projectStatusId) {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.projectStatusId = projectStatusId;
+    }
+
+    public Integer getProjectStatusId() {
+        return projectStatusId;
+    }
+
+    public void setProjectStatusId(Integer projectStatusId) {
+        this.projectStatusId = projectStatusId;
     }
 
     public Integer getId() {
@@ -54,6 +66,7 @@ public class ProjectResponseDto {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
+                ", projectStatusId=" + projectStatusId +
                 '}';
     }
 }

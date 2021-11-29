@@ -129,5 +129,19 @@ public class CommonMapper {
         return responseDto;
 
     }
+
+    public static ProjectStatusResponseDto fromProjectStatusEntityToProjectStatusResponseDto(ProjectStatusEntity projectStatus) {
+        ProjectStatusResponseDto responseDto = new ProjectStatusResponseDto();
+        responseDto.setId(projectStatus.getId());
+        responseDto.setName(projectStatus.getName());
+        return responseDto;
+    }
+
+    public static ProjectStatusEntity fromProjectStatusRequestDtoToProjectStatusEntity(ProjectStatusRequestDto requestDto) {
+        ProjectStatusEntity projectStatus = new ProjectStatusEntity();
+        projectStatus.setId(requestDto.getId());
+        projectStatus.setName(requestDto.getName());
+        return projectStatus;
+    }
 }
 

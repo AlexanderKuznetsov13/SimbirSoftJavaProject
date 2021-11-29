@@ -1,12 +1,12 @@
 package ru.alex.kuznetsov.project.simbirsoft.entity;
 
+
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "taskstatus")
-public class TaskStatusEntity {
+@Table(name = "projectstatus")
+public class ProjectStatusEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,16 +15,17 @@ public class TaskStatusEntity {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "taskStatusTask")
-    private Set<TaskEntity> tasks;
+    @OneToMany(mappedBy = "projectStatusProject")
+    private Set<ProjectEntity> projects;
 
-    public TaskStatusEntity(){
+
+    public ProjectStatusEntity() {
     }
 
-    public TaskStatusEntity(Integer id, String name, Set<TaskEntity> tasks) {
+    public ProjectStatusEntity(Integer id, String name, Set<ProjectEntity> projects) {
         this.id = id;
         this.name = name;
-        this.tasks = tasks;
+        this.projects = projects;
     }
 
     public Integer getId() {
@@ -43,11 +44,11 @@ public class TaskStatusEntity {
         this.name = name;
     }
 
-    public Set<TaskEntity> getTasks() {
-        return tasks;
+    public Set<ProjectEntity> getProjects() {
+        return projects;
     }
 
-    public void setTasks(Set<TaskEntity> tasks) {
-        this.tasks = tasks;
+    public void setProjects(Set<ProjectEntity> projects) {
+        this.projects = projects;
     }
 }

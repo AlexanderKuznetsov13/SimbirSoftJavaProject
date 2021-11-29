@@ -1,5 +1,7 @@
 package ru.alex.kuznetsov.project.simbirsoft.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import ru.alex.kuznetsov.project.simbirsoft.dto.UsersByProjectRequestDto;
 import ru.alex.kuznetsov.project.simbirsoft.dto.UsersByProjectResponseDto;
@@ -15,6 +17,8 @@ import java.util.stream.Collectors;
 @Service
 public class UsersByProjectServiceImpl implements IUsersByProjectService {
 
+    private final Logger logger = LoggerFactory.getLogger(UsersByProjectServiceImpl.class);
+
     private final UsersByProjectRepository usersByProjectRepository;
 
     public UsersByProjectServiceImpl(UsersByProjectRepository usersByProjectRepository) {
@@ -23,14 +27,14 @@ public class UsersByProjectServiceImpl implements IUsersByProjectService {
 
     @Override
     public UsersByProjectResponseDto getById(Integer id) {
-        System.out.println(String.format("getById - get task with %id",id));
+        logger.debug(String.format("getById - get task with %id",id));
         UsersByProjectEntity usersByProject = usersByProjectRepository.findById(id).orElseThrow(() -> new NoEntityException(String.format("userByProject with ID = %d not found", id)));
         return CommonMapper.fromUsersByProjectEntityToUserByProjectResponseDto(usersByProject);
     }
 
     @Override
     public UsersByProjectResponseDto create(UsersByProjectRequestDto requestDto) {
-        System.out.println(String.format("create - create userByProject"));
+        logger.debug(String.format("create - create userByProject"));
         UsersByProjectEntity usersByProject = CommonMapper.fromUsersByProjectRequestDtoToUsersByProjectEntity(requestDto);
         return CommonMapper.fromUsersByProjectEntityToUserByProjectResponseDto(usersByProjectRepository.save(usersByProject));
     }
@@ -38,20 +42,20 @@ public class UsersByProjectServiceImpl implements IUsersByProjectService {
     @Override
     public UsersByProjectResponseDto update(UsersByProjectRequestDto requestDto) {
         UsersByProjectEntity usersByProject = CommonMapper.fromUsersByProjectRequestDtoToUsersByProjectEntity(requestDto);
-        System.out.println(String.format("update - update userByProject with %id", usersByProject.getId()));
+        logger.debug(String.format("update - update userByProject with %id", usersByProject.getId()));
         return CommonMapper.fromUsersByProjectEntityToUserByProjectResponseDto(usersByProjectRepository.save(usersByProject));
     }
 
     @Override
     public List<UsersByProjectResponseDto> getAll() {
-        System.out.println(String.format("getAll - retrieve all userByProject"));
+        logger.debug(String.format("getAll - retrieve all userByProject"));
         return usersByProjectRepository.findAll().stream().map(CommonMapper::fromUsersByProjectEntityToUserByProjectResponseDto).collect(Collectors.toList());
     }
 
     @Override
     public void deleteById(Integer id) {
         usersByProjectRepository.findById(id).orElseThrow(() -> {
-            System.out.println(String.format("deleteById - UserByProject with ID = %d not found", id));
+            logger.debug(String.format("deleteById - UserByProject with ID = %d not found", id));
             return new NoEntityException(String.format("UserByProject with ID = %d not found", id));
         });
         usersByProjectRepository.deleteById(id);

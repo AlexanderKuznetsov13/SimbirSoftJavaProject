@@ -6,4 +6,6 @@ import ru.alex.kuznetsov.project.simbirsoft.entity.UsersTypeEntity;
 
 @Repository
 public interface UsersTypeRepository extends JpaRepository<UsersTypeEntity, Integer> {
+
+    UsersTypeEntity findByName(String name);
 }

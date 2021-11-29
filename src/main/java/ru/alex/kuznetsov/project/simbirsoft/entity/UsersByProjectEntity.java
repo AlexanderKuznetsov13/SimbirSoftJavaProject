@@ -1,7 +1,7 @@
 package ru.alex.kuznetsov.project.simbirsoft.entity;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name="usersbyproject")
@@ -24,15 +24,15 @@ public class UsersByProjectEntity {
     private ProjectEntity projectUsersByProject;
 
     @OneToMany(mappedBy = "authorUsersByProjectTask")
-    private List<TaskEntity> authorTasks;
+    private Set<TaskEntity> authorTasks;
 
     @OneToMany(mappedBy = "contractorUsersByProjectTask")
-    private List<TaskEntity> contractorTasks;
+    private Set<TaskEntity> contractorTasks;
 
     public UsersByProjectEntity() {
     }
 
-    public UsersByProjectEntity(Integer id, UsersEntity usersUsersByProject, UsersTypeEntity usersTypeUsersByProject, ProjectEntity projectUsersByProject, List<TaskEntity> authorTasks, List<TaskEntity> contractorTasks) {
+    public UsersByProjectEntity(Integer id, UsersEntity usersUsersByProject, UsersTypeEntity usersTypeUsersByProject, ProjectEntity projectUsersByProject, Set<TaskEntity> authorTasks, Set<TaskEntity> contractorTasks) {
         this.id = id;
         this.usersUsersByProject = usersUsersByProject;
         this.usersTypeUsersByProject = usersTypeUsersByProject;
@@ -73,19 +73,19 @@ public class UsersByProjectEntity {
         this.projectUsersByProject = projectUsersByProject;
     }
 
-    public List<TaskEntity> getAuthorTasks() {
+    public Set<TaskEntity> getAuthorTasks() {
         return authorTasks;
     }
 
-    public void setAuthorTasks(List<TaskEntity> authorTasks) {
+    public void setAuthorTasks(Set<TaskEntity> authorTasks) {
         this.authorTasks = authorTasks;
     }
 
-    public List<TaskEntity> getContractorTasks() {
+    public Set<TaskEntity> getContractorTasks() {
         return contractorTasks;
     }
 
-    public void setContractorTasks(List<TaskEntity> contractorTasks) {
+    public void setContractorTasks(Set<TaskEntity> contractorTasks) {
         this.contractorTasks = contractorTasks;
     }
 }
