@@ -1,7 +1,7 @@
 package ru.alex.kuznetsov.project.simbirsoft.entity;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "userstype")
@@ -18,15 +18,15 @@ public class UsersTypeEntity {
     private String description;
 
     @OneToMany(mappedBy = "usersTypeUsers")
-    private List<UsersEntity> users;
+    private Set<UsersEntity> users;
 
     @OneToMany(mappedBy = "usersTypeUsersByProject")
-    private List<UsersByProjectEntity> usersByProjects;
+    private Set<UsersByProjectEntity> usersByProjects;
 
     public UsersTypeEntity(){
     }
 
-    public UsersTypeEntity(Integer id, String name, String description, List<UsersEntity> users, List<UsersByProjectEntity> usersByProjects) {
+    public UsersTypeEntity(Integer id, String name, String description, Set<UsersEntity> users, Set<UsersByProjectEntity> usersByProjects) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -58,19 +58,19 @@ public class UsersTypeEntity {
         this.description = description;
     }
 
-    public List<UsersEntity> getUsers() {
+    public Set<UsersEntity> getUsers() {
         return users;
     }
 
-    public void setUsers(List<UsersEntity> users) {
+    public void setUsers(Set<UsersEntity> users) {
         this.users = users;
     }
 
-    public List<UsersByProjectEntity> getUsersByProjects() {
+    public Set<UsersByProjectEntity> getUsersByProjects() {
         return usersByProjects;
     }
 
-    public void setUsersByProjects(List<UsersByProjectEntity> usersByProjects) {
+    public void setUsersByProjects(Set<UsersByProjectEntity> usersByProjects) {
         this.usersByProjects = usersByProjects;
     }
 }
