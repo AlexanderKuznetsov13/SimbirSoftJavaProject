@@ -18,14 +18,18 @@ public class ProjectRequestDto {
     @Schema(description = "ID статуса проекта")
     private Integer projectStatusId;
 
+    @Schema(description = "Стоимость проекта")
+    private Long price;
+
     public ProjectRequestDto() {
     }
 
-    public ProjectRequestDto(Integer id, String name, String description, Integer projectStatusId) {
+    public ProjectRequestDto(Integer id, String name, String description, Integer projectStatusId, Long price) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.projectStatusId = projectStatusId;
+        this.price = price;
     }
 
     public Integer getProjectStatusId() {
@@ -60,6 +64,14 @@ public class ProjectRequestDto {
         this.description = description;
     }
 
+    public Long getPrice() {
+        return price;
+    }
+
+    public void setPrice(Long price) {
+        this.price = price;
+    }
+
     @Override
     public String toString() {
         return "ProjectRequestDto{" +
@@ -67,6 +79,7 @@ public class ProjectRequestDto {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", projectStatusId=" + projectStatusId +
+                ", price=" + price +
                 '}';
     }
 }

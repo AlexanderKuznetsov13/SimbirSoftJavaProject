@@ -19,6 +19,9 @@ public class ProjectEntity {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "price")
+    private Long price;
+
     @OneToMany(mappedBy = "projectRelease")
     private Set<ReleaseEntity> releases;
 
@@ -32,14 +35,16 @@ public class ProjectEntity {
     public ProjectEntity() {
     }
 
-    public ProjectEntity(Integer id, String name, String description, Set<ReleaseEntity> releases, Set<UsersByProjectEntity> usersByProjects, ProjectStatusEntity projectStatusProject) {
+    public ProjectEntity(Integer id, String name, String description, Long price, Set<ReleaseEntity> releases, Set<UsersByProjectEntity> usersByProjects, ProjectStatusEntity projectStatusProject) {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.price = price;
         this.releases = releases;
         this.usersByProjects = usersByProjects;
         this.projectStatusProject = projectStatusProject;
     }
+
 
     public Integer getId() {
         return id;
@@ -87,5 +92,13 @@ public class ProjectEntity {
 
     public void setProjectStatusProject(ProjectStatusEntity projectStatusProject) {
         this.projectStatusProject = projectStatusProject;
+    }
+
+    public Long getPrice() {
+        return price;
+    }
+
+    public void setPrice(Long price) {
+        this.price = price;
     }
 }

@@ -29,6 +29,9 @@ public class UsersEntity {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "account_id")
+    private Integer accountId;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "usertype_id", nullable = false)
     private UsersTypeEntity usersTypeUsers;
@@ -39,7 +42,8 @@ public class UsersEntity {
     public UsersEntity(){
     }
 
-    public UsersEntity(Integer id, String name, String surname, String middlename, String email, String login, String password, UsersTypeEntity usersTypeUsers, Set<UsersByProjectEntity> usersByProjects) {
+
+    public UsersEntity(Integer id, String name, String surname, String middlename, String email, String login, String password, Integer accountId, UsersTypeEntity usersTypeUsers, Set<UsersByProjectEntity> usersByProjects) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -47,9 +51,11 @@ public class UsersEntity {
         this.email = email;
         this.login = login;
         this.password = password;
+        this.accountId = accountId;
         this.usersTypeUsers = usersTypeUsers;
         this.usersByProjects = usersByProjects;
     }
+
 
     public Integer getId() {
         return id;
@@ -121,5 +127,13 @@ public class UsersEntity {
 
     public void setUsersByProjects(Set<UsersByProjectEntity> usersByProjects) {
         this.usersByProjects = usersByProjects;
+    }
+
+    public Integer getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(Integer accountId) {
+        this.accountId = accountId;
     }
 }

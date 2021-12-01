@@ -30,10 +30,13 @@ public class UserRequestDto {
     @Schema(description = "Типа пользователя")
     private int userTypeId;
 
+    @Schema(description = "ID аккаунта")
+    private int accountId;
+
     public UserRequestDto() {
     }
 
-    public UserRequestDto(int id, String name, String surname, String middlename, String nickname, String email, String password, int userTypeId) {
+    public UserRequestDto(int id, String name, String surname, String middlename, String nickname, String email, String password, int userTypeId, int accountId) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -42,7 +45,9 @@ public class UserRequestDto {
         this.email = email;
         this.password = password;
         this.userTypeId = userTypeId;
+        this.accountId = accountId;
     }
+
 
     public int getId() {
         return id;
@@ -108,6 +113,14 @@ public class UserRequestDto {
         this.userTypeId = userTypeId;
     }
 
+    public int getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(int accountId) {
+        this.accountId = accountId;
+    }
+
     @Override
     public String toString() {
         return "UserRequestDto{" +
@@ -119,6 +132,7 @@ public class UserRequestDto {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", userTypeId=" + userTypeId +
+                ", accountId=" + accountId +
                 '}';
     }
 }

@@ -73,6 +73,7 @@ databaseChangeLog:
               - column: {name: email, type: VARCHAR(100)}
               - column: {name: login, type: VARCHAR(100)}
               - column: {name: password, type: VARCHAR(100)}
+              - column: {name: account_id, type: INT}
               - column: {name: usertype_id, type: INT, constraints: { nullable: false, foreignKeyName: users_usertype_fk, references: userstype(id)}}
 
   - changeSet:
@@ -135,6 +136,38 @@ databaseChangeLog:
                   name: description
                   value: "customer description"
   - changeSet:
+      id: insert-rows-taskstatus-table
+      author: Aleksander Kuznetsov
+      comment: "insert default values for taskstatus"
+      changes:
+        - insert:
+            tableName: taskstatus
+            columns:
+              - column:
+                  name: name
+                  value: "CREATED"
+              - column:
+                  name: description
+                  value: "created"
+        - insert:
+            tableName: taskstatus
+            columns:
+              - column:
+                  name: name
+                  value: "IN_PROGRESS"
+              - column:
+                  name: description
+                  value: "in progress state"
+        - insert:
+            tableName: taskstatus
+            columns:
+              - column:
+                  name: name
+                  value: "DONE"
+              - column:
+                  name: description
+                  value: "done"
+  - changeSet:
       id: insert-user-table
       author: Aleksander Kuznetsov
       comment: "insert default users"
@@ -163,3 +196,11 @@ databaseChangeLog:
               - column:
                   name: usertype_id
                   value: 1
+  - changeSet:
+      id: addColumnInTable-project-price-column
+      author: Aleksander Kuznetsov
+      changes:
+        - addColumn:
+            tableName: project
+            columns:
+              - column: {name: price, type: BIGINT}

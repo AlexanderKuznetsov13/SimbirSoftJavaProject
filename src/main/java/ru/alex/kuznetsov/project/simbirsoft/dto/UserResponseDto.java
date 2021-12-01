@@ -30,10 +30,13 @@ public class UserResponseDto {
     @Schema(description = "Типа пользователя")
     private int userTypeId;
 
+    @Schema(description = "ID аккаунта")
+    private int accountId;
+
     public UserResponseDto() {
     }
 
-    public UserResponseDto(int id, String name, String surname, String middlename, String nickname, String email, String password, int userTypeId) {
+    public UserResponseDto(int id, String name, String surname, String middlename, String nickname, String email, String password, int userTypeId, int accountId) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -42,7 +45,9 @@ public class UserResponseDto {
         this.email = email;
         this.password = password;
         this.userTypeId = userTypeId;
+        this.accountId = accountId;
     }
+
 
     public int getId() {
         return id;
@@ -108,9 +113,17 @@ public class UserResponseDto {
         this.userTypeId = userTypeId;
     }
 
+    public int getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(int accountId) {
+        this.accountId = accountId;
+    }
+
     @Override
     public String toString() {
-        return "UserRequestDto{" +
+        return "UserResponseDto{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
@@ -119,6 +132,7 @@ public class UserResponseDto {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", userTypeId=" + userTypeId +
+                ", accountId=" + accountId +
                 '}';
     }
 }
