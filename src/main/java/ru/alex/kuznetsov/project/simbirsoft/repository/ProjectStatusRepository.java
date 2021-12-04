@@ -14,4 +14,11 @@ public interface ProjectStatusRepository extends JpaRepository<ProjectStatusEnti
     @Query(value = "SELECT id FROM projectstatus ps WHERE ps.name == 'DONE'", nativeQuery = true)
     Integer getDoneId();
 
+    /**
+     * find all projects is IN_PROGRESS
+     * @return projectId IN_PROGRESS
+     */
+    @Query(value = "SELECT id FROM projectstatus ps WHERE ps.name == 'IN_PROGRESS'", nativeQuery = true)
+    Integer getInProgressId();
+
 }

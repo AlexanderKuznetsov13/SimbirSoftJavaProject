@@ -27,6 +27,7 @@ public class CommonMapper {
         project.setId(requestDto.getId());
         project.setName(requestDto.getName());
         project.setDescription(requestDto.getDescription());
+        project.setPrice(requestDto.getPrice());
         return project;
     }
 
@@ -35,6 +36,7 @@ public class CommonMapper {
         responseDto.setId(project.getId());
         responseDto.setName(project.getName());
         responseDto.setDescription(project.getDescription());
+        responseDto.setPrice(project.getPrice());
         return responseDto;
     }
 

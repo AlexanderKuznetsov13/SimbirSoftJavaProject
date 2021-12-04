@@ -25,6 +25,7 @@
         <springdoc.version>1.5.9</springdoc.version>
         <postgresql.version>42.2.24</postgresql.version>
         <liquibase.version>4.4.2</liquibase.version>
+        <springcloud-feign.version>3.0.3</springcloud-feign.version>
     </properties>
 
     <dependencies>
@@ -87,6 +88,13 @@
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-core</artifactId>
             <version>${liquibase.version}</version>
+        </dependency>
+
+<!--        feign-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <version>${springcloud-feign.version}</version>
         </dependency>
 
     </dependencies>
